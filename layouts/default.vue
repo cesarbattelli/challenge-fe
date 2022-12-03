@@ -16,23 +16,23 @@ export default {
 
 <style scoped>
 .header {
+  height: 10vh;
   position: fixed;
   top: 0px;
-  height: 10vh;
   width: 100%;
 }
 .main {
   background-color: #222;
   color: #fff;
-  padding: 60px 40px 60px 40px;
   min-height: 80vh;
   overflow: scroll;
+  padding: 60px 40px 60px 40px;
 }
 
 .footer {
-  position: fixed;
   bottom: 0px;
   height: 10vh;
+  position: fixed;
   width: 100%;
 }
 </style>

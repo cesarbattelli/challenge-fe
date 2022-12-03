@@ -22,20 +22,20 @@ export default {
 
 <style scoped>
 .container {
+  align-items: center;
+  background-color: #7600e4;
   display: flex;
   height: 50px;
-  background-color: #7600e4;
   justify-content: flex-end;
-  align-items: center;
 }
 .total {
-  margin-right: 120px;
-  color: #e2d7d7;
   align-items: center;
+  color: #e2d7d7;
   display: flex;
+  margin-right: 120px;
 }
 .totalNum {
-  margin-left: 5px;
   font-size: 2rem;
+  margin-left: 5px;
 }
 </style>

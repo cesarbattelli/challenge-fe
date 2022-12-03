@@ -7,14 +7,13 @@
 </template>
 
 <script>
-import { MAX_COUNTERS } from "~/constants/constants";
+import { MAX_COUNTERS, MAX_COUNTER_NAME_LENGTH } from "~/constants/constants";
 
 export default {
   name: "Header",
 
   methods: {
     async create() {
-      // this.$swal("Success!", "Transaction was successful", "success");
       const { value: nameInput } = await this.$swal.fire({
         input: "text",
         title: "Nuevo contador",
@@ -23,14 +22,14 @@ export default {
         inputValidator: (value) => {
           if (!value) {
             return "El nombre es requerido";
-          } else if (value.length > 20) {
-            return "El nombre no puede contener más de 20 caracteres";
+          } else if (value.length > MAX_COUNTER_NAME_LENGTH) {
+            return `El nombre no puede contener más de ${MAX_COUNTER_NAME_LENGTH} caracteres`;
           }
         },
       });
 
       if (nameInput) {
-        this.$store.commit("create", nameInput);
+        this.$store.commit("createCounter", nameInput);
       }
     },
   },
@@ -44,24 +43,31 @@ export default {
 
 <style scoped>
 .container {
+  align-items: center;
+  background-color: #7600e4;
   display: flex;
   height: 50px;
-  background-color: #7600e4;
   justify-content: flex-end;
-  align-items: center;
 }
 
 .btn {
-  height: 30px;
-  margin: 10px;
-  cursor: pointer;
+  background-color: #7178df;
   border: none;
   color: white;
-  background-color: #7178df;
+  cursor: pointer;
+  height: 30px;
+  margin: 10px;
   padding: 0 10px 0 10px;
 }
 
 .btn:hover {
   background-color: #f6f8;
+}
+
+.filter {
+  border-radius: 8px;
+  border: 1px solid #fff;
+  color: #fafafa;
+  padding: 10px;
 }
 </style>

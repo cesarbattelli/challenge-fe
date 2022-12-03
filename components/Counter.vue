@@ -3,16 +3,14 @@
     <div class="container">
       <div class="name">{{ name }}</div>
       <div class="counter">
-        <!-- <button @click="decrement"> -->
         <font-awesome-icon
-          class="iconButton"
+          class="pointer"
           @click="decrement"
           :icon="['fas', 'minus']"
         />
-        <!-- </button> -->
         <div class="count">{{ count }}</div>
         <font-awesome-icon
-          class="iconButton"
+          class="pointer"
           @click="increment"
           :icon="['fas', 'plus']"
         />
@@ -53,7 +51,7 @@ export default {
       this.$store.commit("decrement", this.id);
     },
     remove() {
-      this.$store.commit("remove", this.id);
+      this.$store.commit("removeCounter", this.id);
     },
   },
 };
@@ -61,17 +59,17 @@ export default {
 
 <style scoped>
 .container {
-  flex: 1;
-  height: 50px;
+  align-content: center;
+  align-items: center;
   background-color: #fafafa;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  margin: 10px;
   color: #000;
   display: flex;
+  flex: 1;
+  height: 50px;
   justify-content: center;
-  align-content: center;
-  align-items: center;
+  margin: 10px;
   padding: 0 20px 0 20px;
 }
 .name {
@@ -81,8 +79,8 @@ export default {
 .counter {
   display: flex;
   margin: 10px;
-  width: 80px;
   text-align: center;
+  width: 80px;
 }
 .count {
   width: 30px;

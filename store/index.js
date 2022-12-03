@@ -1,12 +1,21 @@
-import { GetterTree, ActionTree, MutationTree } from "vuex";
 import { MAX_COUNT, MIN_COUNT } from "~/constants/constants";
 
 export const state = () => ({
-  test: "hola",
-  counters: process.client ? ,
+  counters: [],
+  filters: [],
 });
 
 export const mutations = {
+  initializeStore(state) {
+    state.counters =
+      process.client && localStorage.getItem("counters")
+        ? JSON.parse(localStorage.getItem("counters"))
+        : [];
+    state.filters =
+      process.client && sessionStorage.getItem("filters")
+        ? JSON.parse(sessionStorage.getItem("filters"))
+        : [];
+  },
   increment(state, id) {
     const counter = state.counters.find((c) => {
       return c.id === id;
@@ -19,7 +28,7 @@ export const mutations = {
     counter.count > MIN_COUNT && counter.count--;
   },
 
-  create(state, name) {
+  createCounter(state, name) {
     const maxId = state.counters.length
       ? Math.max.apply(
           null,
@@ -29,15 +38,20 @@ export const mutations = {
         )
       : 1;
     state.counters.push({ id: maxId + 1, name, count: 0 });
-    if (process.client) {
-      localStorage.setItem("counters", JSON.stringify(state.counters));
-    }
   },
 
-  remove(state, id) {
+  removeCounter(state, id) {
     const index = state.counters.findIndex((c) => c.id === id);
     if (index > -1) {
       state.counters.splice(index, 1);
     }
+  },
+
+  createFilter(state, { value, operator }) {
+    state.filters.push({ operator, value });
+  },
+
+  removeFilter(state, index) {
+    state.filters.splice(index, 1);
   },
 };
